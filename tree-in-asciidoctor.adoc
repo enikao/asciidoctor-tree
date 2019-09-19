@@ -1,0 +1,90 @@
+= How to Render a (Hierarchical) Tree in Asciidoctor
+
+== Simplest Variant
+
+[source, asciidoc]
+....
+include::simple.adoc[]
+....
+
+.Result
+====
+include::simple.adoc[]
+====
+
+
+== Default Asciidoctor Style
+
+[source, asciidoc]
+....
+include::asciidoctor-style.adoc[]
+....
+
+.Result
+====
+include::asciidoctor-style.adoc[]
+====
+
+
+== Externalized
+
+[source, asciidoc]
+....
+include::externalized.adoc[]
+....
+
+.asciidoctor-style.iuml
+[source, plantuml]
+....
+include::asciidoctor-style.iuml[]
+....
+
+.Result
+====
+include::externalized.adoc[]
+====
+
+
+== Barebones
+
+[source, asciidoc]
+....
+include::barebones.adoc[]
+....
+
+.Result
+====
+include::barebones.adoc[]
+====
+
+
+== No Dot Available
+
+[source, asciidoc]
+....
+include::nodot.adoc[]
+....
+
+.Result
+====
+include::nodot.adoc[]
+====
+
+
+== No Dot Externalized
+
+[source, asciidoc]
+....
+include::nodot-externalized.adoc[]
+....
+
+[source, plantuml]
+....
+include::nodot-asciidoctor-style.iuml[]
+....
+
+
+.Result
+====
+include::nodot-externalized.adoc[]
+====
