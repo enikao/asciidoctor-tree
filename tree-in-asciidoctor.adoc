@@ -1,33 +1,88 @@
 = How to Render a (Hierarchical) Tree in Asciidoctor
 
-== Simplest Variant
+Showing a hierarchical tree, like a file system directory tree, in Asciidoctor is surprisingly hard.
+We use PlantUML to render the tree on all common platforms.
 
+include::asciidoctor-style.adoc[]
+
+
+== Problem Description
+
+Describe a hierarchical tree in an Asciidoctor document and render it as in a
+link:https://en.wikipedia.org/wiki/Tree_view[tree view].
+
+
+== Existing Approaches
+
+We know of two Asciidoctor extensions tackeling this problem:
+
+* link:https://github.com/asciidoctor/asciidoctor-extensions-lab#extension-catalog[TreeBlockMacro]
+Shows an actual file system tree.
+Available for Ruby Asciidoctor.
+
+* link:https://github.com/allati/asciidoctor-extension-monotree[Monotree]
+Renders a structural description of a tree as AsciiArt.
+Available for AsciidoctorJ.
+
+These approaches show some drawbacks:
+
+* Only available for one platform
+
+* Limited to file system trees, or AsciiArt
+
+
+== Solution: Creole Markup via PlantUML
+
+Most platforms support the 
+link:https://asciidoctor.org/docs/asciidoctor-diagram/[Asciidoctor Diagram extension],
+Which, in turn, supports link:http://plantuml.com[PlantUML].
+Within PlantUML, we can use link:http://plantuml.com/en/creole[Creole] to render a hierarchical tree.
+
+We need a container to host the Creole markup.
+A `legend` seems suitable.
+
+For the actual tree, we draw the tree as AsciiArt.
+
+NOTE: Make sure to indent each tree level with *exactly two spaces*.
+
+We use PlantUML's `skinparam` feature for formatting the output similar to Asciidoctor.
+
+If we embed the PlantUML diagram with parameters `format=svg` and `opts="inline"`:
+
+* The text stays as text (i.e. selectable) in both HTML and PDF output
+
+* We don't need to ship additional files with the output
+
+
+== Examples
+
+.Simplest Variant: Only get rid of border and background
 [source, asciidoc]
 ....
 include::simple.adoc[]
 ....
 
-.Result
+.Simplest Variant: Only get rid of border and background
 ====
 include::simple.adoc[]
 ====
 
+We might want to hide the different origin of the tree rendering by adjusting the font.
 
-== Default Asciidoctor Style
-
+.Use same font as default Asciidoctor style
 [source, asciidoc]
 ....
 include::asciidoctor-style.adoc[]
 ....
 
-.Result
+.Use same font as default Asciidoctor style
 ====
 include::asciidoctor-style.adoc[]
 ====
 
+We can use PlantUML's `!include` feature to externalize the formatting.
 
-== Externalized
-
+.Externalized formatting
 [source, asciidoc]
 ....
 include::externalized.adoc[]
@@ -39,52 +94,62 @@ include::externalized.adoc[]
 include::asciidoctor-style.iuml[]
 ....
 
-.Result
+.Externalized formatting
 ====
 include::externalized.adoc[]
 ====
 
+For reference, we show how the tree rendering looks like without any styling.
 
-== Barebones
-
+.Barebons tree rendering
 [source, asciidoc]
 ....
 include::barebones.adoc[]
 ....
 
-.Result
+.Barebons tree rendering
 ====
 include::barebones.adoc[]
 ====
 
 
-== No Dot Available
+== Remove Dependency on Graphviz / Dot
 
+PlantUML requires link:https://graphviz.org/[Graphviz] to be installed.
+However, there's an exception: Rendering
+link:http://plantuml.com/sequence-diagram[sequence diagrams]
+does not depend on Graphviz.
+So we need to convince PlantUML to draw a sequence diagram _without actually drawing any diagram_.
+
+This feels more like a hack, but the following works while leading to only slightly larger images.
+
+.Trick PlantUML into a sequence diagram to drop dependency on Graphviz
 [source, asciidoc]
 ....
 include::nodot.adoc[]
 ....
 
-.Result
+.Trick PlantUML into a sequence diagram to drop dependency on Graphviz
 ====
 include::nodot.adoc[]
 ====
 
+As this hack is quite ugly, we can hide it in an `!include`.
+The external file is only required at rendering time.
 
-== No Dot Externalized
-
+.Hide PlantUML sequence diagram hack in external file
 [source, asciidoc]
 ....
 include::nodot-externalized.adoc[]
 ....
 
+.nodot-asciidoctor-style.iuml
 [source, plantuml]
 ....
 include::nodot-asciidoctor-style.iuml[]
 ....
 
-
-.Result
+.Hide PlantUML sequence diagram hack in external file
 ====
 include::nodot-externalized.adoc[]
 ====

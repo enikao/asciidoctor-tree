@@ -441,10 +441,142 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>How to Render a (Hierarchical) Tree in Asciidoctor</h1>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Showing a hierarchical tree, like a file system directory tree, in Asciidoctor is surprisingly hard.
+We use PlantUML to render the tree on all common platforms.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 159 169" zoomAndPan="magnify" width="159px" height="169px"><defs/><g><rect fill="#FFFFFF" height="132.6846" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="140" x="8" y="26"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="37" x="14" y="47.1533">Root</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="68.9341">Element 1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="88.7148">Element 1.1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="108.4956">Element 1.2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="128.2764">Element 2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="148.0571">Element 2.1</text><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="61.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="62.6711" y2="62.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="52.7808" y2="62.6711"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="81.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="82.4519" y2="82.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="62.6711" y2="82.4519"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="101.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="102.2327" y2="102.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="82.4519" y2="102.2327"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="121.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="122.0134" y2="122.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="62.6711" y2="122.0134"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="140.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="141.7942" y2="141.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="122.0134" y2="141.7942"/><!--
+@startuml
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+	FontName "Noto Serif", "DejaVu Serif", serif
+	FontSize 17
+}
+legend
+Root
+|_ Element 1
+  |_ Element 1.1
+  |_ Element 1.2
+|_ Element 2
+  |_ Element 2.1
+end legend
+@enduml
+
+PlantUML version 1.2019.06(Fri May 24 17:10:25 GMT 2019)
+(APACHE source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 9.0.4+11
+Operating System: Linux
+OS Version: 4.4.0-17134-Microsoft
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_simplest_variant">Simplest Variant</h2>
+<h2 id="_problem_description">Problem Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Describe a hierarchical tree in an Asciidoctor document and render it as in a
+<a href="https://en.wikipedia.org/wiki/Tree_view">tree view</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_existing_approaches">Existing Approaches</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We know of two Asciidoctor extensions tackeling this problem:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/asciidoctor/asciidoctor-extensions-lab#extension-catalog">TreeBlockMacro</a>
+Shows an actual file system tree.
+Available for Ruby Asciidoctor.</p>
+</li>
+<li>
+<p><a href="https://github.com/allati/asciidoctor-extension-monotree">Monotree</a>
+Renders a structural description of a tree as AsciiArt.
+Available for AsciidoctorJ.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These approaches show some drawbacks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only available for one platform</p>
+</li>
+<li>
+<p>Limited to file system trees, or AsciiArt</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_solution_creole_markup_via_plantuml">Solution: Creole Markup via PlantUML</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most platforms support the
+<a href="https://asciidoctor.org/docs/asciidoctor-diagram/">Asciidoctor Diagram extension</a>,
+Which, in turn, supports <a href="http://plantuml.com">PlantUML</a>.
+Within PlantUML, we can use <a href="http://plantuml.com/en/creole">Creole</a> to render a hierarchical tree.</p>
+</div>
+<div class="paragraph">
+<p>We need a container to host the Creole markup.
+A <code>legend</code> seems suitable.</p>
+</div>
+<div class="paragraph">
+<p>For the actual tree, we draw the tree as AsciiArt.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Make sure to indent each tree level with <strong>exactly two spaces</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We use PlantUML&#8217;s <code>skinparam</code> feature for formatting the output similar to Asciidoctor.</p>
+</div>
+<div class="paragraph">
+<p>If we embed the PlantUML diagram with parameters <code>format=svg</code> and <code>opts="inline"</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The text stays as text (i.e. selectable) in both HTML and PDF output</p>
+</li>
+<li>
+<p>We don&#8217;t need to ship additional files with the output</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">Examples</h2>
 <div class="sectionbody">
 <div class="listingblock">
+<div class="title">Simplest Variant: Only get rid of border and background</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -464,7 +596,7 @@ end legend
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 1. Result</div>
+<div class="title">Example 1. Simplest Variant: Only get rid of border and background</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -499,12 +631,11 @@ Country: DE
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>We might want to hide the different origin of the tree rendering by adjusting the font.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_default_asciidoctor_style">Default Asciidoctor Style</h2>
-<div class="sectionbody">
 <div class="listingblock">
+<div class="title">Use same font as default Asciidoctor style</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -514,71 +645,6 @@ skinparam Legend {
 	FontName "Noto Serif", "DejaVu Serif", serif
 	FontSize 17
 }
-
-legend
-
-Root
-|_ Element 1
-  |_ Element 1.1
-  |_ Element 1.2
-|_ Element 2
-  |_ Element 2.1
-
-end legend
-----</code></pre>
-</div>
-</div>
-<div class="exampleblock">
-<div class="title">Example 2. Result</div>
-<div class="content">
-<div class="imageblock">
-<div class="content">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 159 209" zoomAndPan="magnify" width="159px" height="209px"><defs/><g><rect fill="#FFFFFF" height="172.2461" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="140" x="8" y="26"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="0" x="19" y="47.1533"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="37" x="14" y="66.9341">Root</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="88.7148">Element 1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="108.4956">Element 1.1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="128.2764">Element 1.2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="148.0571">Element 2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="167.8379">Element 2.1</text><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="81.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="82.4519" y2="82.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="72.5615" y2="82.4519"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="101.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="102.2327" y2="102.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="82.4519" y2="102.2327"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="121.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="122.0134" y2="122.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="102.2327" y2="122.0134"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="140.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="141.7942" y2="141.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="82.4519" y2="141.7942"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="160.575"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="161.575" y2="161.575"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="141.7942" y2="161.575"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="0" x="19" y="189.6187"/><!--
-@startuml
-skinparam Legend {
-	BackgroundColor transparent
-	BorderColor transparent
-	FontName "Noto Serif", "DejaVu Serif", serif
-	FontSize 17
-}
-
-legend
-
-Root
-|_ Element 1
-  |_ Element 1.1
-  |_ Element 1.2
-|_ Element 2
-  |_ Element 2.1
-
-end legend
-@enduml
-
-PlantUML version 1.2019.06(Fri May 24 17:10:25 GMT 2019)
-(APACHE source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 9.0.4+11
-Operating System: Linux
-OS Version: 4.4.0-17134-Microsoft
-Default Encoding: UTF-8
-Language: de
-Country: DE
---></g></svg>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_externalized">Externalized</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
-----
-!include asciidoctor-style.iuml
 legend
 Root
 |_ Element 1
@@ -590,19 +656,8 @@ end legend
 ----</code></pre>
 </div>
 </div>
-<div class="listingblock">
-<div class="title">asciidoctor-style.iuml</div>
-<div class="content">
-<pre class="highlight"><code class="language-plantuml" data-lang="plantuml">skinparam Legend {
-	BackgroundColor transparent
-	BorderColor transparent
-	FontName "Noto Serif", "DejaVu Serif", serif
-	FontSize 17
-}</code></pre>
-</div>
-</div>
 <div class="exampleblock">
-<div class="title">Example 3. Result</div>
+<div class="title">Example 2. Use same font as default Asciidoctor style</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -639,12 +694,80 @@ Country: DE
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>We can use PlantUML&#8217;s <code>!include</code> feature to externalize the formatting.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_barebones">Barebones</h2>
-<div class="sectionbody">
 <div class="listingblock">
+<div class="title">Externalized formatting</div>
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
+----
+!include asciidoctor-style.iuml
+legend
+Root
+|_ Element 1
+  |_ Element 1.1
+  |_ Element 1.2
+|_ Element 2
+  |_ Element 2.1
+end legend
+----</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">asciidoctor-style.iuml</div>
+<div class="content">
+<pre class="highlight"><code class="language-plantuml" data-lang="plantuml">skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+	FontName "Noto Serif", "DejaVu Serif", serif
+	FontSize 17
+}</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 3. Externalized formatting</div>
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 159 169" zoomAndPan="magnify" width="159px" height="169px"><defs/><g><rect fill="#FFFFFF" height="132.6846" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="140" x="8" y="26"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="37" x="14" y="47.1533">Root</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="68.9341">Element 1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="88.7148">Element 1.1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="108.4956">Element 1.2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="37" y="128.2764">Element 2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="45" y="148.0571">Element 2.1</text><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="61.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="62.6711" y2="62.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="52.7808" y2="62.6711"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="81.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="82.4519" y2="82.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="62.6711" y2="82.4519"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="101.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="102.2327" y2="102.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="82.4519" y2="102.2327"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="29" y="121.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="30" y1="122.0134" y2="122.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="22" x2="22" y1="62.6711" y2="122.0134"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="37" y="140.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="38" y1="141.7942" y2="141.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="30" x2="30" y1="122.0134" y2="141.7942"/><!--
+@startuml
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+	FontName "Noto Serif", "DejaVu Serif", serif
+	FontSize 17
+}
+legend
+Root
+|_ Element 1
+  |_ Element 1.1
+  |_ Element 1.2
+|_ Element 2
+  |_ Element 2.1
+end legend
+@enduml
+
+PlantUML version 1.2019.06(Fri May 24 17:10:25 GMT 2019)
+(APACHE source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 9.0.4+11
+Operating System: Linux
+OS Version: 4.4.0-17134-Microsoft
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For reference, we show how the tree rendering looks like without any styling.</p>
+</div>
+<div class="listingblock">
+<div class="title">Barebons tree rendering</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -660,7 +783,7 @@ end legend
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. Result</div>
+<div class="title">Example 4. Barebons tree rendering</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -694,9 +817,20 @@ Country: DE
 </div>
 </div>
 <div class="sect1">
-<h2 id="_no_dot_available">No Dot Available</h2>
+<h2 id="_remove_dependency_on_graphviz_dot">Remove Dependency on Graphviz / Dot</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>PlantUML requires <a href="https://graphviz.org/">Graphviz</a> to be installed.
+However, there&#8217;s an exception: Rendering
+<a href="http://plantuml.com/sequence-diagram">sequence diagrams</a>
+does not depend on Graphviz.
+So we need to convince PlantUML to draw a sequence diagram <em>without actually drawing any diagram</em>.</p>
+</div>
+<div class="paragraph">
+<p>This feels more like a hack, but the following works while leading to only slightly larger images.</p>
+</div>
 <div class="listingblock">
+<div class="title">Trick PlantUML into a sequence diagram to drop dependency on Graphviz</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -718,26 +852,23 @@ skinparam SequenceParticipant {
 }
 hide footbox
 participant dummy
-
 legend top left
-
 Root
 |_ Element 1
   |_ Element 1.1
   |_ Element 1.2
 |_ Element 2
   |_ Element 2.1
-
 end legend
 ----</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 5. Result</div>
+<div class="title">Example 5. Trick PlantUML into a sequence diagram to drop dependency on Graphviz</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 162 249" zoomAndPan="magnify" width="162px" height="249px"><defs/><g><line style="stroke: #FFFFFF; stroke-width: 0.0; stroke-dasharray: 5.0,5.0;" x1="81.5" x2="81.5" y1="217.2461" y2="237.2461"/><rect fill="#FFFFFF" height="24" style="stroke: #FFFFFF; stroke-width: 0.0;" width="14" x="74.5" y="192.2461"/><text fill="#000000" font-family="sans-serif" font-size="0" lengthAdjust="spacingAndGlyphs" textLength="0" x="81.5" y="199.2461">dummy</text><rect fill="#FFFFFF" height="172.2461" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="140" x="11" y="11"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="0" x="22" y="32.1533"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="37" x="17" y="51.9341">Root</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="40" y="73.7148">Element 1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="93.4956">Element 1.1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="113.2764">Element 1.2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="40" y="133.0571">Element 2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="152.8379">Element 2.1</text><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="32" y="66.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="33" y1="67.4519" y2="67.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="25" y1="57.5615" y2="67.4519"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="86.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="87.2327" y2="87.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="67.4519" y2="87.2327"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="106.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="107.0134" y2="107.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="87.2327" y2="107.0134"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="32" y="125.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="33" y1="126.7942" y2="126.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="25" y1="67.4519" y2="126.7942"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="145.575"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="146.575" y2="146.575"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="126.7942" y2="146.575"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="0" x="22" y="174.6187"/><!--
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="none" version="1.1" viewBox="0 0 162 209" zoomAndPan="magnify" width="162px" height="209px"><defs/><g><line style="stroke: #FFFFFF; stroke-width: 0.0; stroke-dasharray: 5.0,5.0;" x1="81.5" x2="81.5" y1="177.6846" y2="197.6846"/><rect fill="#FFFFFF" height="24" style="stroke: #FFFFFF; stroke-width: 0.0;" width="14" x="74.5" y="152.6846"/><text fill="#000000" font-family="sans-serif" font-size="0" lengthAdjust="spacingAndGlyphs" textLength="0" x="81.5" y="159.6846">dummy</text><rect fill="#FFFFFF" height="132.6846" rx="5" ry="5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="140" x="11" y="11"/><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="37" x="17" y="32.1533">Root</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="40" y="53.9341">Element 1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="73.7148">Element 1.1</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="93.4956">Element 1.2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="81" x="40" y="113.2764">Element 2</text><text fill="#000000" font-family="&quot;Noto Serif&quot;, &quot;DejaVu Serif&quot;, serif" font-size="17" lengthAdjust="spacingAndGlyphs" textLength="97" x="48" y="133.0571">Element 2.1</text><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="32" y="46.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="33" y1="47.6711" y2="47.6711"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="25" y1="37.7808" y2="47.6711"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="66.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="67.4519" y2="67.4519"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="47.6711" y2="67.4519"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="86.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="87.2327" y2="87.2327"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="67.4519" y2="87.2327"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="32" y="106.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="33" y1="107.0134" y2="107.0134"/><line style="stroke: #000000; stroke-width: 1.0;" x1="25" x2="25" y1="47.6711" y2="107.0134"/><rect fill="none" height="2" style="stroke: #000000; stroke-width: 1.0;" width="2" x="40" y="125.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="41" y1="126.7942" y2="126.7942"/><line style="stroke: #000000; stroke-width: 1.0;" x1="33" x2="33" y1="107.0134" y2="126.7942"/><!--
 @startuml
 skinparam Legend {
 	BackgroundColor transparent
@@ -757,16 +888,13 @@ skinparam SequenceParticipant {
 }
 hide footbox
 participant dummy
-
 legend top left
-
 Root
 |_ Element 1
   |_ Element 1.1
   |_ Element 1.2
 |_ Element 2
   |_ Element 2.1
-
 end legend
 @enduml
 
@@ -785,12 +913,12 @@ Country: DE
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>As this hack is quite ugly, we can hide it in an <code>!include</code>.
+The external file is only required at rendering time.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_no_dot_externalized">No Dot Externalized</h2>
-<div class="sectionbody">
 <div class="listingblock">
+<div class="title">Hide PlantUML sequence diagram hack in external file</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -807,6 +935,7 @@ end legend
 </div>
 </div>
 <div class="listingblock">
+<div class="title">nodot-asciidoctor-style.iuml</div>
 <div class="content">
 <pre class="highlight"><code class="language-plantuml" data-lang="plantuml">skinparam Legend {
 	BackgroundColor transparent
@@ -830,7 +959,7 @@ participant dummy</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Result</div>
+<div class="title">Example 6. Hide PlantUML sequence diagram hack in external file</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -885,7 +1014,7 @@ Country: DE
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-09-20 00:12:27 +0200
+Last updated 2019-09-20 10:29:27 +0200
 </div>
 </div>
 </body>
