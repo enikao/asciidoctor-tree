@@ -14,7 +14,7 @@ link:https://en.wikipedia.org/wiki/Tree_view[tree view].
 
 == Existing Approaches
 
-We know of two Asciidoctor extensions tackeling this problem:
+We know of two Asciidoctor extensions tackling this problem:
 
 * link:https://github.com/asciidoctor/asciidoctor-extensions-lab#extension-catalog[TreeBlockMacro]
 Shows an actual file system tree.
@@ -24,7 +24,7 @@ Available for Ruby Asciidoctor.
 Renders a structural description of a tree as AsciiArt.
 Available for AsciidoctorJ.
 
-These approaches show some drawbacks:
+These approaches have some drawbacks:
 
 * Only available for one platform
 
@@ -99,15 +99,15 @@ include::asciidoctor-style.iuml[]
 include::externalized.adoc[]
 ====
 
-For reference, we show how the tree rendering looks like without any styling.
+For reference, we show what the tree rendering looks like without any styling.
 
-.Barebons tree rendering
+.Barebone tree rendering
 [source, asciidoc]
 ....
 include::barebones.adoc[]
 ....
 
-.Barebons tree rendering
+.Barebone tree rendering
 ====
 include::barebones.adoc[]
 ====
@@ -123,13 +123,13 @@ So we need to convince PlantUML to draw a sequence diagram _without actually dra
 
 This feels more like a hack, but the following works while leading to only slightly larger images.
 
-.Trick PlantUML into a sequence diagram to drop dependency on Graphviz
+.Trick PlantUML into a sequence diagram to no longer have a depencency on Graphviz
 [source, asciidoc]
 ....
 include::nodot.adoc[]
 ....
 
-.Trick PlantUML into a sequence diagram to drop dependency on Graphviz
+.Trick PlantUML into a sequence diagram to no longer have a depencency on Graphviz
 ====
 include::nodot.adoc[]
 ====

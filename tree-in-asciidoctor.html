@@ -495,7 +495,7 @@ Country: DE
 <h2 id="_existing_approaches">Existing Approaches</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We know of two Asciidoctor extensions tackeling this problem:</p>
+<p>We know of two Asciidoctor extensions tackling this problem:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -512,7 +512,7 @@ Available for AsciidoctorJ.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These approaches show some drawbacks:</p>
+<p>These approaches have some drawbacks:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -764,10 +764,10 @@ Country: DE
 </div>
 </div>
 <div class="paragraph">
-<p>For reference, we show how the tree rendering looks like without any styling.</p>
+<p>For reference, we show what the tree rendering looks like without any styling.</p>
 </div>
 <div class="listingblock">
-<div class="title">Barebons tree rendering</div>
+<div class="title">Barebone tree rendering</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -783,7 +783,7 @@ end legend
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. Barebons tree rendering</div>
+<div class="title">Example 4. Barebone tree rendering</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -830,7 +830,7 @@ So we need to convince PlantUML to draw a sequence diagram <em>without actually 
 <p>This feels more like a hack, but the following works while leading to only slightly larger images.</p>
 </div>
 <div class="listingblock">
-<div class="title">Trick PlantUML into a sequence diagram to drop dependency on Graphviz</div>
+<div class="title">Trick PlantUML into a sequence diagram to no longer have a depencency on Graphviz</div>
 <div class="content">
 <pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[plantuml, format=svg, opts="inline"]
 ----
@@ -840,6 +840,9 @@ skinparam Legend {
 	FontName "Noto Serif", "DejaVu Serif", serif
 	FontSize 17
 }
+
+' We use skinparams to hide our dummy participant
+' and make it as little space as possible
 skinparam SequenceLifeLineBorderThickness 0
 skinparam SequenceLifeLineBorderColor transparent
 skinparam SequenceParticipant {
@@ -851,7 +854,10 @@ skinparam SequenceParticipant {
 	Padding 0
 }
 hide footbox
+
+' "participant" nudges PlantUML to a sequence diagram
 participant dummy
+
 legend top left
 Root
 |_ Element 1
@@ -864,7 +870,7 @@ end legend
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 5. Trick PlantUML into a sequence diagram to drop dependency on Graphviz</div>
+<div class="title">Example 5. Trick PlantUML into a sequence diagram to no longer have a depencency on Graphviz</div>
 <div class="content">
 <div class="imageblock">
 <div class="content">
@@ -876,6 +882,7 @@ skinparam Legend {
 	FontName "Noto Serif", "DejaVu Serif", serif
 	FontSize 17
 }
+
 skinparam SequenceLifeLineBorderThickness 0
 skinparam SequenceLifeLineBorderColor transparent
 skinparam SequenceParticipant {
@@ -887,7 +894,9 @@ skinparam SequenceParticipant {
 	Padding 0
 }
 hide footbox
+
 participant dummy
+
 legend top left
 Root
 |_ Element 1
@@ -1014,7 +1023,7 @@ Country: DE
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-09-20 10:29:27 +0200
+Last updated 2019-09-21 15:59:39 +0200
 </div>
 </div>
 </body>

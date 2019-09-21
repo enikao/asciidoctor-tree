@@ -6,6 +6,9 @@ skinparam Legend {
 	FontName "Noto Serif", "DejaVu Serif", serif
 	FontSize 17
 }
+
+' We use skinparams to hide our dummy participant
+' and make it as little space as possible
 skinparam SequenceLifeLineBorderThickness 0
 skinparam SequenceLifeLineBorderColor transparent
 skinparam SequenceParticipant {
@@ -17,7 +20,10 @@ skinparam SequenceParticipant {
 	Padding 0
 }
 hide footbox  
+
+' "participant" nudges PlantUML to a sequence diagram
 participant dummy
+
 legend top left
 Root
 |_ Element 1
