@@ -115,6 +115,10 @@ include::barebones.adoc[]
 
 == Remove Dependency on Graphviz / Dot
 
+IMPORTANT: Thanks to 
+link:https://forum.plantuml.net/10200/dont-require-dot-for-shapeless-diagrams-and-svg-output[PlantUML's awesome response time],
+*trees won't depend on Graphviz any more from version 1.2019.11 onwards*.
+
 PlantUML requires link:https://graphviz.org/[Graphviz] to be installed.
 However, there's an exception: Rendering
 link:http://plantuml.com/sequence-diagram[sequence diagrams]
